@@ -8,13 +8,13 @@ function OverLayer({ direction }) {
         <div className="overlay-left">
             <h1>Welcome Back!</h1>
             <p>To keep connected login with your personal info</p>
-            <Button type="LogIn" />
+            <Button type="LogIn" selector="overlayer-Login" />
         </div>    
     :
     <div className="overlay-right">
             <h1>Hello There</h1>
             <p>Create an Account to start your journey with us</p>
-            <Button type="SignUp" />
+            <Button type="SignUp" selector="overlayer-SignUp" />
         </div> 
     }
       </div>

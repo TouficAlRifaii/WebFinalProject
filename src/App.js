@@ -1,14 +1,15 @@
-import AuthForm from './AuthForm';
-import OverLayer from './OverLayer';
-import './App.css';
+import AuthForm from "./AuthForm";
+import OverLayer from "./OverLayer";
 
 function App() {
   return (
     <div className="App">
-      <AuthForm type="Login" />
-      <AuthForm type="SignUp" />
-      <OverLayer direction="left" />
-      <OverLayer direction="right" />
+      <div className="container" id="main">
+        <AuthForm type="Login" />
+        <AuthForm type="SignUp" />
+        <OverLayer direction="left" />
+        <OverLayer direction="right" />
+      </div>
     </div>
   );
 }

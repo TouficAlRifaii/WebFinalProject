@@ -1,7 +1,7 @@
-function Button({type}){
+function Button({type , selector}){
     return(
         <>
-        <button>{type}</button>
+        <button className={selector}>{type}</button>
         </>
     )
 }
