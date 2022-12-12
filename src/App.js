@@ -1,4 +1,5 @@
 import AuthForm from './AuthForm';
+import OverLayer from './OverLayer';
 import './App.css';
 
 function App() {
@@ -6,6 +7,8 @@ function App() {
     <div className="App">
       <AuthForm type="Login" />
       <AuthForm type="SignUp" />
+      <OverLayer direction="left" />
+      <OverLayer direction="right" />
     </div>
   );
 }
