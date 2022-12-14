@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const Register = () => {
   const userRef = useRef();
@@ -17,6 +18,10 @@ const Register = () => {
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
+  
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
@@ -37,6 +42,11 @@ const Register = () => {
     const result = USER_REGEX.test(user);
     setValidName(result);
   }, [user]);
+
+  useEffect(() => {
+    const result = EMAIL_REGEX.test(email);
+    setValidEmail(result);
+  }, [email]);
 
   useEffect(() => {
     const result = PASSWORD_REGEX.test(password);
@@ -92,6 +102,35 @@ const Register = () => {
           4 to 24 charachters. <br />
           Must Begin with a letter. <br />
           Letters, numbers, underscores, hyphens are allowed.
+        </p>
+
+        <label htmlFor="email">
+          Email:
+          <span className={validEmail ? "valid" : "hide"}>
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+          <span className={validEmail || !email ? "hide" : "invalid"}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          aria-invalid={validEmail ? "false" : "true"}
+          aria-describedby="emailnote"
+          onFocus={() => setEmailFocus(true)}
+          onBlur={() => setEmailFocus(false)}
+        />
+        <p
+          id="emailnote"
+          className={
+            emailFocus && email && !validEmail ? "instructions" : "offscreen"
+          }
+        >
+          <FontAwesomeIcon icon={faInfoCircle} />
+          Enter a valid email
         </p>
 
         <label htmlFor="password">
