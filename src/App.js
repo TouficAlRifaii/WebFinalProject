@@ -1,15 +1,17 @@
 import AuthForm from "./AuthForm";
 import OverLayer from "./OverLayer";
+import Register from "./Register";
 
 function App() {
   return (
     <div className="App">
-      <div className="container" id="main">
+      <Register/>
+      {/* <div className="container" id="main">
         <AuthForm type="Login" />
         <AuthForm type="SignUp" />
         <OverLayer direction="left" />
         <OverLayer direction="right" />
-      </div>
+      </div> */}
     </div>
   );
 }
