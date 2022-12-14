@@ -8,7 +8,7 @@ function OverLayer({ direction }) {
         <div className="overlay-left">
             <h1>Welcome Back!</h1>
             <p>To keep connected login with your personal info</p>
-            <Button type="LogIn" selector="overlayer-Login" />
+            <Button type="Login" selector="overlayer-Login" />
         </div>    
     :
     <div className="overlay-right">
