@@ -78,8 +78,12 @@ button {
   transition: transform 80ms ease-in;
   cursor: pointer;
 }
-button:active {
+button:active:enabled {
   transform: scale(0.9);
+}
+button:disabled{
+  background-color: grey;
+  border: 1px solid grey;
 }
 .overlayer-Login,
 .overlayer-SignUp {
