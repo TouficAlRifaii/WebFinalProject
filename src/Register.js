@@ -85,7 +85,7 @@ const Register = () => {
         <section>
           <p
             ref={errRef}
-            className={errMsg ? "errMsg" : "offscreen"}
+            className={errMsg ? "errmsg" : "offscreen"}
             aria-live="assertive"
           >
             {errMsg}
