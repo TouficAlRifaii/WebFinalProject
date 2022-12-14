@@ -35,16 +35,12 @@ const Register = () => {
 
   useEffect(() => {
     const result = USER_REGEX.test(user);
-    console.log(result);
-    console.log(user);
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
     const result = PASSWORD_REGEX.test(password);
     setValidPassword(result);
-    console.log(result);
-    console.log(password);
     const match = password === matchPassword;
     setValidMatchPasword(match);
   }, [password, matchPassword]);
@@ -62,8 +58,9 @@ const Register = () => {
       >
         {errMsg}
       </p>
-      <h1>Register</h1>
+
       <form>
+        <h1>Register</h1>
         <label htmlFor="username">
           Username:
           <span className={validName ? "valid" : "hide"}>
@@ -173,8 +170,14 @@ const Register = () => {
           Must match the first password input field.
         </p>
 
-        <button disabled={!validName || !validPassword || !validMatchPassword ? true : false}>Sign Up</button>
-      </form> 
+        <button
+          disabled={
+            !validName || !validPassword || !validMatchPassword ? true : false
+          }
+        >
+          Sign Up
+        </button>
+      </form>
     </section>
   );
 };
