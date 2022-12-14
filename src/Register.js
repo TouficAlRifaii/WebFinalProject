@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const Register = () => {
   const userRef = useRef();
@@ -18,7 +19,7 @@ const Register = () => {
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
-  
+
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
@@ -211,11 +212,20 @@ const Register = () => {
 
         <button
           disabled={
-            !validName || !validPassword || !validMatchPassword ? true : false
+            !validName || !validPassword || !validMatchPassword || !validEmail
+              ? true
+              : false
           }
         >
           Sign Up
         </button>
+        <p>
+          Already registered? <br />
+          <span className="line">
+            {/* I'll put a router link here later */}
+            <a href="#">Log In</a>
+          </span>
+        </p>
       </form>
     </section>
   );
