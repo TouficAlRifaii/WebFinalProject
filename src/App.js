@@ -1,4 +1,4 @@
-import AuthForm from "./AuthForm";
+import AuthForm from "./components/AuthForm";
 import Login from "./Login";
 import OverLayer from "./OverLayer";
 import Register from "./Register";
