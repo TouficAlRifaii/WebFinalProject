@@ -60,7 +60,7 @@ const Login = () => {
               value={password}
               required
             />
-            <button>Log In</button>
+            <button disabled={!email || !password ? true : false}>Log In</button>
             <p>
               Don't have an account? <br />
               <span>
