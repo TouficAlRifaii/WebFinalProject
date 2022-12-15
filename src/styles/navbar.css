@@ -1,0 +1,35 @@
+li {
+  list-style: none;
+}
+
+.navbar {
+  line-height: 10vh;
+  height: 10vh;
+  box-shadow: rgba(50, 50, 93, 0.23) 0 30px 30px -20px;
+}
+
+.logo {
+  font-size: 30px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  width: 75%;
+}
+.navContainer {
+  max-width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-links li {
+  color: black;
+  font-size: 20px;
+  padding: 0 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+  text-decoration: none;
+}

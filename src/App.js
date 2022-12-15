@@ -2,7 +2,7 @@ import {
   Route,
   Routes,
   useNavigate,
-  BrowserRouter as Router
+  BrowserRouter as Router,
 } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -13,17 +13,19 @@ import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
 
 function App() {
-  
   return (
     <div className="App">
       {/* <Register /> */}
       {/* <Login/> */}
-      <Navbar />
+
       <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-        </Routes>
+        <Navbar />
+        <div className="body">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
+          </Routes>
+        </div>
       </Router>
     </div>
   );

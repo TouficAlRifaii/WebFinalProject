@@ -1,30 +1,37 @@
-onClick={() => Navigate("/login")}import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import "../styles/navbar.css";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
-      <h3 className="logo">SSN</h3>
-      <Router>
+    <nav className="navbar">
+      <div className="navContainer">
+        <h3 className="logo">SSN</h3>
+
         <ul className="nav-links">
-          <Link onClick={() => Navigate("/")} to="/">
+          <Link to="/">
             <li>Home</li>
           </Link>
-          <Link onClick={() => Navigate("/services")} to="/services">
+          <Link  to="/services">
             <li>Services</li>
           </Link>
-          <Link onClick={() => Navigate("/login")} to="/login">
+          <Link  to="/login">
             <li>Login</li>
           </Link>
-          <Link onClick={() => Navigate("/signup")} to="/signup">
+          <Link to="/signup">
             <li>SignUp</li>
           </Link>
-          <Link onClick={() => Navigate("/account")} to="/account">
+          <Link to="/account">
             <li>Account</li>
           </Link>
         </ul>
-      </Router>
-    </div>
+        <button className="mobile-menu">
+        <FontAwesomeIcon icon={faBars} />
+        </button>
+      </div>
+    </nav>
   );
 };
 
