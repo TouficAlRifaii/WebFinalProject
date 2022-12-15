@@ -5,8 +5,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styles/authForms.css"
-
+import "../styles/authForms.css";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
@@ -243,6 +242,7 @@ const Register = () => {
               </p>
 
               <button
+                className="login-button"
                 disabled={
                   !validName ||
                   !validPassword ||
@@ -267,7 +267,7 @@ const Register = () => {
             <div className="overlay">
               <div className="overlay-right">
                 <h1>Already have an Account?</h1>
-                <button className="overlayer-Login">Login</button>
+                <button className="login-button overlayer-Login">Login</button>
               </div>
             </div>
           </div>

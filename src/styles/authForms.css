@@ -51,7 +51,7 @@
     border: none;
     outline: none;
   }
-  button {
+  .login-button {
     color: #fff;
     background-color: #ff4b2b;
     font-size: 12px;
@@ -66,10 +66,10 @@
     transition: transform 80ms ease-in;
     cursor: pointer;
   }
-  button:active:enabled {
+  .login-button:active:enabled {
     transform: scale(0.9);
   }
-  button:disabled{
+  .login-button:disabled{
     background-color: grey;
     border: 1px solid grey;
   }

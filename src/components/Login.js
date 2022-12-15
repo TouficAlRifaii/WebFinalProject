@@ -62,7 +62,7 @@ const Login = () => {
                 value={password}
                 required
               />
-              <button disabled={!email || !password ? true : false}>
+              <button className="login-button" disabled={!email || !password ? true : false}>
                 Log In
               </button>
               <p>
@@ -78,7 +78,7 @@ const Login = () => {
             <div className="overlay">
               <div className="overlay-right">
                 <h1>Don't have an Account?</h1>
-                <button className="overlayer-Login">SignUp</button>
+                <button className="login-button overlayer-Login">SignUp</button>
               </div>
             </div>
           </div>
