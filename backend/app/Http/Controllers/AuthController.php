@@ -50,16 +50,15 @@ class AuthController extends Controller
         ]);
         if($validate->fails()){
             return response()->json([
-                "status"=>"fails",
+                "status"=>"failed",
                 "results"=>[],
             ], 400);
         }
         $checkIfexist = User::where("email" , $request->email)->get();
-        if($checkIfexist == []){
+        if(isset($checkIfexist[0]['email'])){
             return response()->json([
-                "status" => "fails",
+                "status" => "failed",
                 "message" => "User Already Exist",
-                "user" => $checkIfexist
             ] , 409);
         }
         $user = User::create([
