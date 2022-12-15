@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
+        $token = Auth::attempt(['email' => $request->email , 'password' => $request->password , 'isBlocked' => false]);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -95,7 +95,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "You are not Logged in",
-            ]);
+            ] , 401);
 
         } else if (Auth::check()) {
             $validate = Validator::make($request->all(), [
@@ -123,7 +123,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "You are not Logged in",
-            ]);
+            ] , 401);
 
         } else if (Auth::check()) {
             return response()->json(Auth::user());
