@@ -1,4 +1,5 @@
-import { Link, BrowserRouter as Router } from "react-router-dom";
+onClick={() => Navigate("/login")}import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -6,19 +7,19 @@ const Navbar = () => {
       <h3 className="logo">SSN</h3>
       <Router>
         <ul className="nav-links">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <Link to="/services">
-            <li>Service</li>
+          <Link onClick={() => Navigate("/")} to="/">
+            <li>Home</li>
           </Link>
-          <Link to="/login">
+          <Link onClick={() => Navigate("/services")} to="/services">
+            <li>Services</li>
+          </Link>
+          <Link onClick={() => Navigate("/login")} to="/login">
             <li>Login</li>
           </Link>
-          <Link to="/signup">
+          <Link onClick={() => Navigate("/signup")} to="/signup">
             <li>SignUp</li>
           </Link>
-          <Link to="/account">
+          <Link onClick={() => Navigate("/account")} to="/account">
             <li>Account</li>
           </Link>
         </ul>
