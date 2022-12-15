@@ -6,7 +6,8 @@ import Register from "./Register";
 function App() {
   return (
     <div className="App">
-      <Register />
+      {/* <Register /> */}
+      <Login/>
       {/* <div className="container" id="main">
         <AuthForm type="Login" />
         <AuthForm type="SignUp" />
