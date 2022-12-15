@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
+import TextEditor from "./components/TextEditor";
 
 function App() {
   return (
@@ -26,7 +27,11 @@ function App() {
             <Route path="/signup" element={<Register />} />
           </Routes>
         </div>
+        <Routes>
+          <Route exact path="/" element={<TextEditor />}></Route>
+        </Routes>
       </Router>
+
     </div>
   );
 }
