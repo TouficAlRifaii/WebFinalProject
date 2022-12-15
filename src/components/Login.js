@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import "../styles/authForms.css"
 
 const Login = () => {
   const emailRef = useRef();
