@@ -42,11 +42,7 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:6',
-        // ]);
+        
         $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -58,11 +54,12 @@ class AuthController extends Controller
                 "results"=>[],
             ], 400);
         }
-        $checkIfexist = User::where("email" , $request->email);
-        if($checkIfexist){
+        $checkIfexist = User::where("email" , $request->email)->get();
+        if($checkIfexist == []){
             return response()->json([
                 "status" => "fails",
-                "message" => "User Already Exist"
+                "message" => "User Already Exist",
+                "user" => $checkIfexist
             ] , 409);
         }
         $user = User::create([
