@@ -1,5 +1,5 @@
 import Input from "./Input";
-import Button from "../Button";
+import Button from "./Button";
 function AuthForm({ type }) {
   return (
     <div className={type}>

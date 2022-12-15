@@ -1,7 +1,7 @@
 import AuthForm from "./components/AuthForm";
-import Login from "./Login";
-import OverLayer from "./OverLayer";
-import Register from "./Register";
+import Login from "./components/Login";
+import OverLayer from "./components/OverLayer";
+import Register from "./components/Register";
 
 function App() {
   return (
