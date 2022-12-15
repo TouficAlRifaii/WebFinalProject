@@ -11,11 +11,6 @@ use Validator;
 class AuthController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
-
     public function login(Request $request)
     {
         $request->validate([
@@ -96,7 +91,13 @@ class AuthController extends Controller
     }
     public function editProfile(Request $request)
     {
-        if(Auth::check()){
+        if (!Auth::check()) {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ]);
+
+        } else if (Auth::check()) {
             $validate = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
             ]);
@@ -108,18 +109,25 @@ class AuthController extends Controller
             }
             $user = Auth::user();
             $user->name = $request->name;
-            if($user->save()){
+            if ($user->save()) {
                 return response()->json([
-                    "status" => "success"
+                    "status" => "success",
                 ]);
             }
         }
-        
+
     }
     public function me()
     {
+        if (!Auth::check()) {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ]);
 
-        return response()->json(Auth::user());
+        } else if (Auth::check()) {
+            return response()->json(Auth::user());
+        }
 
     }
 
