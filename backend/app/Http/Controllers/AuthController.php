@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Validator;
 
 class AuthController extends Controller
 {
@@ -30,10 +31,8 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
         return response()->json([
                 'status' => 'success',
-                'user' => $user,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
@@ -43,12 +42,29 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
-        $request->validate([
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:6',
+        // ]);
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
-
+        if($validate->fails()){
+            return response()->json([
+                "status"=>"fails",
+                "results"=>[],
+            ], 400);
+        }
+        $checkIfexist = User::where("email" , $request->email);
+        if($checkIfexist){
+            return response()->json([
+                "status" => "fails",
+                "message" => "User Already Exist"
+            ] , 409);
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -59,11 +75,6 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
         ]);
     }
 
@@ -80,12 +91,15 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => 'success',
-            'user' => Auth::user(),
             'authorisation' => [
                 'token' => Auth::refresh(),
                 'type' => 'bearer',
             ]
         ]);
+    }
+    public function me()
+    {
+        return response()->json(Auth::user());
     }
 
 }
