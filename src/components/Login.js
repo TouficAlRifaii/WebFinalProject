@@ -39,7 +39,10 @@ const Login = () => {
       if (response.data["status"] === "success") {
         const token = response.data.authorisation["token"];
         const role = response.data.authorisation["role"];
-        setAuth({ email, password, token, role });
+        setAuth({ email,token, role });
+        localStorage.setItem("token" , token);
+        localStorage.setItem("role" , role);
+        localStorage.setItem("email" , email);
         // setEmail("");
         // setPassword("");
         navigate(from, { replace: true });

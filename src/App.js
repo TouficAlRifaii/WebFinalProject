@@ -13,9 +13,10 @@ import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
 import TextEditor from "./components/TextEditor";
 import RequireAuth from "./components/RequireAuth";
-import Unauthorized from "./components/Unauthorized"
+import Unauthorized from "./components/Unauthorized";
 import useRefreshToken from "./hooks/useRefreshTokens";
 import Users from "./components/Users";
+import PersistLogin from "./components/PersistLogin";
 
 function App() {
   const refresh = useRefreshToken();
@@ -33,14 +34,17 @@ function App() {
           </Routes>
         </div>
         <Routes>
-          <Route element={<RequireAuth  allowedRoles={["Admin"]}/>}>
-            <Route exact path="/" element={<TextEditor />}></Route>
-            <Route path="/users" element={<Users /> }/>
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+              <Route exact path="/" element={<TextEditor />}></Route>
+              <Route path="/users" element={<Users />} />
+            </Route>
           </Route>
+
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
         </Routes>
       </Router>
-      <button onClick={()=> refresh()}>Refresh</button>
+      <button onClick={() => refresh()}>Refresh</button>
     </div>
   );
 }
