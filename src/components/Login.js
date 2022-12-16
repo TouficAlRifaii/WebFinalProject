@@ -1,5 +1,9 @@
 import { useRef, useEffect, useState } from "react";
-import "../styles/authForms.css"
+import { Link } from "react-router-dom";
+import axios from "../api/axios";
+import "../styles/authForms.css";
+
+const LOGIN_URL = "/login";
 
 const Login = () => {
   const emailRef = useRef();
@@ -18,11 +22,21 @@ const Login = () => {
     setErrMsg("");
   }, [email, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setEmail("");
-    setPassword("");
-    setSuccess(true);
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      const response = await axios.post(LOGIN_URL, formData);
+      if (response.data["status"] === "success") {
+        setEmail("");
+        setPassword("");
+        setSuccess(true);
+      }
+    } catch (error) {
+      setErrMsg(error.response.data["message"]);
+    }
   };
 
   return (
@@ -62,23 +76,23 @@ const Login = () => {
                 value={password}
                 required
               />
-              <button className="login-button" disabled={!email || !password ? true : false}>
+              <button
+                className="login-button"
+                disabled={!email || !password ? true : false}
+              >
                 Log In
               </button>
-              <p>
-                Don't have an account? <br />
-                <span>
-                  {/* I'll put a router link here later */}
-                  <a href="#">Sign Up</a>
-                </span>
-              </p>
             </form>
           </div>
           <div className="overlayContainer">
             <div className="overlay">
               <div className="overlay-right">
                 <h1>Don't have an Account?</h1>
-                <button className="login-button overlayer-Login">SignUp</button>
+                <Link to="/signup">
+                  <button className="login-button overlayer-Login">
+                    SignUp
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
