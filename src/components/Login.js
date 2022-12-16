@@ -37,11 +37,11 @@ const Login = () => {
       formData.append("password", password);
       const response = await axios.post(LOGIN_URL, formData);
       if (response.data["status"] === "success") {
-        const token = response.data["token"];
-        const role = response.data["role"];
+        const token = response.data.authorisation["token"];
+        const role = response.data.authorisation["role"];
         setAuth({ email, password, token, role });
-        setEmail("");
-        setPassword("");
+        // setEmail("");
+        // setPassword("");
         navigate(from, { replace: true });
       }
     } catch (error) {

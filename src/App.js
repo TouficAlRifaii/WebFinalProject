@@ -13,6 +13,7 @@ import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
 import TextEditor from "./components/TextEditor";
 import RequireAuth from "./components/RequireAuth";
+import Unauthorized from "./components/Unauthorized"
 
 function App() {
   return (
@@ -29,9 +30,10 @@ function App() {
           </Routes>
         </div>
         <Routes>
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth  allowedRoles={["Admin"]}/>}>
             <Route exact path="/" element={<TextEditor />}></Route>
           </Route>
+          <Route path="/unauthorized" element={<Unauthorized />}></Route>
         </Routes>
       </Router>
     </div>
