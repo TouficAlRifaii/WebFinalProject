@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const USERS_URL = "/getUsers";
 const Users = () => {
   const [users, setUsers] = useState();
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
   const location = useLocation();
 
   const { auth } = useAuth();
@@ -27,7 +28,7 @@ const Users = () => {
             Authorization: authHeader,
           },
         };
-        const response = await axios.get(USERS_URL, config);
+        const response = await axiosPrivate.get(USERS_URL);
         if (response.data["status"] === "success") {
           isMounted && setUsers(response.data.users);
           console.log(response.data);
