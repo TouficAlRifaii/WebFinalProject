@@ -1,13 +1,14 @@
-import { useRef, useEffect, useState , useContext} from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import "../styles/authForms.css";
-import AuthContext from "../context/AuthProvider";
+
+import useAuth from "../hooks/useAuth";
 
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
   const emailRef = useRef();
   const errRef = useRef();
 
@@ -32,9 +33,9 @@ const Login = () => {
       formData.append("password", password);
       const response = await axios.post(LOGIN_URL, formData);
       if (response.data["status"] === "success") {
-        const token  = response.data['token'];
-        const role = response.data['role'];
-        setAuth({ email , password , token , role});
+        const token = response.data["token"];
+        const role = response.data["role"];
+        setAuth({ email, password, token, role });
         setEmail("");
         setPassword("");
         setSuccess(true);
