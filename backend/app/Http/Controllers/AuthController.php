@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt(['email' => $request->email , 'password' => $request->password , 'isBlocked' => false]);
+        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'isBlocked' => false]);
         if (!$token) {
             return response()->json([
                 'status' => 'error',
@@ -95,7 +95,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "You are not Logged in",
-            ] , 401);
+            ], 401);
 
         } else if (Auth::check()) {
             $validate = Validator::make($request->all(), [
@@ -117,28 +117,63 @@ class AuthController extends Controller
         }
 
     }
-    public function getUsers(){
-        if(Auth::check()){
-            $user= Auth::user();
-            if($user->isAdmin){
+    public function getUsers()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin) {
                 $users = User::all();
                 return response()->json([
                     "status" => "success",
-                    "users" => $users
+                    "users" => $users,
                 ]);
-            }else {
+            } else {
                 return response()->json([
                     "status" => "failed",
                     "message" => "You are not an admin",
-                ] , 401);
+                ], 401);
             }
-        }else {
+        } else {
             return response()->json([
                 "status" => "failed",
                 "message" => "You are not Logged in",
-            ] , 401);
+            ], 401);
         }
-        
+
+    }
+    public function blockUser(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin) {
+                $toBlock = User::find($request->id);
+                if ($toBlock) {
+                    $toBlock->isBlocked = true;
+                    if ($toBlock->save()) {
+                        return response()->json([
+                            "status" => "success",
+                        ]);
+                    }
+
+                } else {
+                    return response()->json([
+                        "status" => "failed",
+                        "message" => "user not found"
+                    ]);
+                }
+
+            } else {
+                return response()->json([
+                    "status" => "failed",
+                    "message" => "You are not an admin",
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ], 401);
+        }
     }
     public function me()
     {
@@ -146,7 +181,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => "failed",
                 "message" => "You are not Logged in",
-            ] , 401);
+            ], 401);
 
         } else if (Auth::check()) {
             return response()->json(Auth::user());
