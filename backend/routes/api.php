@@ -10,7 +10,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
     Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+    Route::get('refresh', 'refresh');
     Route::post('blockUser', 'blockUser');
     Route::post('unblockUser', 'unblockUser');
     Route::get('me', 'me');

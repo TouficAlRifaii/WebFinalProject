@@ -94,10 +94,9 @@ class AuthController extends Controller
         if (Auth::check()) {
             return response()->json([
                 'status' => 'success',
-                'authorisation' => [
-                    'token' => Auth::refresh(),
-                    'type' => 'bearer',
-                ],
+                'token' => Auth::refresh(),
+                'type' => 'bearer',
+
             ]);
         }
         return response()->json([
