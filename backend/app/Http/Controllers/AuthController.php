@@ -158,7 +158,7 @@ class AuthController extends Controller
                 } else {
                     return response()->json([
                         "status" => "failed",
-                        "message" => "user not found"
+                        "message" => "user not found",
                     ]);
                 }
 
@@ -174,6 +174,64 @@ class AuthController extends Controller
                 "message" => "You are not Logged in",
             ], 401);
         }
+    }
+    public function getBlockedUsers()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin) {
+                $users = User::where("isBlocked" , true)->get();
+                return response()->json([
+                    "status" => "success",
+                    "users" => $users,
+                ]);
+            } else {
+                return response()->json([
+                    "status" => "failed",
+                    "message" => "You are not an admin",
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ], 401);
+        }
+
+    }
+    public function unblockUser(Request $request){
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin) {
+                $toBlock = User::find($request->id);
+                if ($toBlock) {
+                    $toBlock->isBlocked = false;
+                    if ($toBlock->save()) {
+                        return response()->json([
+                            "status" => "success",
+                        ]);
+                    }
+
+                } else {
+                    return response()->json([
+                        "status" => "failed",
+                        "message" => "user not found",
+                    ]);
+                }
+
+            } else {
+                return response()->json([
+                    "status" => "failed",
+                    "message" => "You are not an admin",
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ], 401);
+        }
+
     }
     public function me()
     {
