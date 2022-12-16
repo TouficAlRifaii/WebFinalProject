@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
 import TextEditor from "./components/TextEditor";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -28,10 +29,11 @@ function App() {
           </Routes>
         </div>
         <Routes>
-          <Route exact path="/" element={<TextEditor />}></Route>
+          <Route element={<RequireAuth />}>
+            <Route exact path="/" element={<TextEditor />}></Route>
+          </Route>
         </Routes>
       </Router>
-
     </div>
   );
 }
