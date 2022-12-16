@@ -10,9 +10,9 @@ const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const logout = useLogout();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const handleLogout = async (e) => {
-    
     await logout();
   };
   return (
@@ -20,24 +20,31 @@ const Navbar = () => {
       <h3 className="logo">SSN</h3>
 
       <ul className={mobile ? "nav-links-mobile" : "nav-links"}>
-        <Link to="/">
-          <li>Home</li>
-        </Link>
-        <Link to="/services">
-          <li>Services</li>
-        </Link>
-        <Link to="/login">
-          <li>Login</li>
-        </Link>
-        <Link to="/signup">
-          <li>SignUp</li>
-        </Link>
-        <Link to="/account">
-          <li>Account</li>
-        </Link>
-        <Link onClick={handleLogout} to="/login">
-          <li>Logout</li>
-        </Link>
+        {token ? (
+          <>
+            <Link to="/">
+              <li>Home</li>
+            </Link>
+            <Link to="/services">
+              <li>Services</li>
+            </Link>
+            <Link to="/account">
+              <li>Account</li>
+            </Link>
+            <Link onClick={handleLogout} to="/login">
+              <li>Logout</li>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              <li>Login</li>
+            </Link>
+            <Link to="/signup">
+              <li>SignUp</li>
+            </Link>
+          </>
+        )}
       </ul>
       <button className="mobile-menu-icon" onClick={() => setMobile(!mobile)}>
         {mobile ? (
