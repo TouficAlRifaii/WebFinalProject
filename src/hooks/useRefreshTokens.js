@@ -17,8 +17,8 @@ const useRefreshToken = () => {
         const response = await axios.get('/refresh', config);
         setAuth(prev => {
             console.log(JSON.stringify(prev));
-            console.log(response.data);
-            return { ...prev, token: response.data.token }
+            console.log(response.data.authorisation["token"]);
+            return { ...prev, token: response.data.authorisation["token"] }
         });
         return response.data.token;
     }
