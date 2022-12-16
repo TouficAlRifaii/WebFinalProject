@@ -91,12 +91,18 @@ class AuthController extends Controller
 
     public function refresh()
     {
+        if (Auth::check()) {
+            return response()->json([
+                'status' => 'success',
+                'authorisation' => [
+                    'token' => Auth::refresh(),
+                    'type' => 'bearer',
+                ],
+            ]);
+        }
         return response()->json([
-            'status' => 'success',
-            'authorisation' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ],
+            'status' => 'failed',
+
         ]);
     }
     public function editProfile(Request $request)
