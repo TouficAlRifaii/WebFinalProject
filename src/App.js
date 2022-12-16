@@ -15,6 +15,7 @@ import TextEditor from "./components/TextEditor";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized"
 import useRefreshToken from "./hooks/useRefreshTokens";
+import Users from "./components/Users";
 
 function App() {
   const refresh = useRefreshToken();
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route element={<RequireAuth  allowedRoles={["Admin"]}/>}>
             <Route exact path="/" element={<TextEditor />}></Route>
+            <Route path="/users" element={<Users /> }/>
           </Route>
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
         </Routes>
