@@ -14,8 +14,10 @@ import Register from "./components/Register";
 import TextEditor from "./components/TextEditor";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized"
+import useRefreshToken from "./hooks/useRefreshTokens";
 
 function App() {
+  const refresh = useRefreshToken();
   return (
     <div className="App">
       {/* <Register /> */}
@@ -36,6 +38,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
         </Routes>
       </Router>
+      <button onClick={()=> refresh()}>Refresh</button>
     </div>
   );
 }
