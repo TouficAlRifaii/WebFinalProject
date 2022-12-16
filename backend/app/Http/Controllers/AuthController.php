@@ -117,6 +117,29 @@ class AuthController extends Controller
         }
 
     }
+    public function getUsers(){
+        if(Auth::check()){
+            $user= Auth::user();
+            if($user->isAdmin){
+                $users = User::all();
+                return response()->json([
+                    "status" => "success",
+                    "users" => $users
+                ]);
+            }else {
+                return response()->json([
+                    "status" => "failed",
+                    "message" => "You are not an admin",
+                ] , 401);
+            }
+        }else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "You are not Logged in",
+            ] , 401);
+        }
+        
+    }
     public function me()
     {
         if (!Auth::check()) {
