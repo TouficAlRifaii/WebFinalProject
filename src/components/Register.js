@@ -6,12 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/authForms.css";
+import axios from "axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const REGISTER_URL = "/register";
 
 const Register = () => {
   const userRef = useRef();
@@ -61,7 +63,7 @@ const Register = () => {
     setErrMsg("");
   }, [user, password, matchPassword]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validation1 = USER_REGEX.test(user);
@@ -71,7 +73,24 @@ const Register = () => {
       setErrMsg("Invalid Entry");
       return;
     }
-    setSuccess(true);
+    try {
+      const formData = new FormData();
+      formData.append("name", user);
+      formData.append("email", email);
+      formData.append("password", password);
+      const response = await axios.post("http://localhost:8000/api/register", formData)
+        // {
+        // method: "post",
+        // data: formData,
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        //   "Access-Control-Allow-Origin": "true",
+        // },
+      
+      console.log(response);
+    } catch (error) {
+      console.log(error.data);
+    }
   };
   return (
     <>
@@ -243,6 +262,7 @@ const Register = () => {
 
               <button
                 className="login-button"
+                type="submit"
                 disabled={
                   !validName ||
                   !validPassword ||
