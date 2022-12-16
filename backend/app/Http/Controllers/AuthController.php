@@ -26,11 +26,21 @@ class AuthController extends Controller
                 'message' => 'Unauthorized',
             ], 401);
         }
-
+        if (Auth::user()->isAdmin) {
+            return response()->json([
+                'status' => 'success',
+                'authorisation' => [
+                    'token' => $token,
+                    "role" => "Admin",
+                    'type' => 'bearer',
+                ],
+            ]);
+        }
         return response()->json([
             'status' => 'success',
             'authorisation' => [
                 'token' => $token,
+                "role" => "User",
                 'type' => 'bearer',
             ],
         ]);
@@ -180,7 +190,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isAdmin) {
-                $users = User::where("isBlocked" , true)->get();
+                $users = User::where("isBlocked", true)->get();
                 return response()->json([
                     "status" => "success",
                     "users" => $users,
@@ -199,7 +209,8 @@ class AuthController extends Controller
         }
 
     }
-    public function unblockUser(Request $request){
+    public function unblockUser(Request $request)
+    {
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isAdmin) {
@@ -246,9 +257,10 @@ class AuthController extends Controller
         }
 
     }
-    public function testGet(){
+    public function testGet()
+    {
         return response()->json([
-            "status"=> "success"
+            "status" => "success",
         ], 200);
     }
 
