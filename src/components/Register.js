@@ -4,11 +4,12 @@ import {
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/authForms.css";
 import axios from "../api/axios";
 import { wait } from "@testing-library/user-event/dist/utils";
+import useAuth from "../hooks/useAuth";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
@@ -21,6 +22,9 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
   const navigate = useNavigate();
+  const location = useLocation;
+  const from = location.state?.from?.pathname || "/";
+  const {auth} = useAuth();
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -41,8 +45,12 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const token = auth?.token;
   useEffect(() => {
     userRef.current.focus();
+    if (token){
+      navigate(from, { replace: true })
+    }
   }, []);
 
   useEffect(() => {

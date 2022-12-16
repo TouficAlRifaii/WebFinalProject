@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { auth , setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -21,8 +21,13 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState("");
 
+  const token = auth?.token;
+
   useEffect(() => {
     emailRef.current.focus();
+    if (token){
+      navigate(from, { replace: true })
+    }
   }, []);
 
   useEffect(() => {

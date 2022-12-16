@@ -1,12 +1,20 @@
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import "../styles/navbar.css";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import useLogout from "../hooks/useLogout";
 
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
+  const logout = useLogout();
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    
+    await logout();
+  };
   return (
     <nav className="navbar">
       <h3 className="logo">SSN</h3>
@@ -26,6 +34,9 @@ const Navbar = () => {
         </Link>
         <Link to="/account">
           <li>Account</li>
+        </Link>
+        <Link onClick={handleLogout} to="/login">
+          <li>Logout</li>
         </Link>
       </ul>
       <button className="mobile-menu-icon" onClick={() => setMobile(!mobile)}>
