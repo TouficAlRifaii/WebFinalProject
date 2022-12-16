@@ -246,5 +246,10 @@ class AuthController extends Controller
         }
 
     }
+    public function testGet(){
+        return response()->json([
+            "status"=> "success"
+        ], 200);
+    }
 
 }
