@@ -1,6 +1,7 @@
 import Feed from "./Feed";
 
-const Home = ({ articles }) => {
+const Home = () => {
+    const articles = {};
   return (
     <main className="Home">
       {articles.length ? (
