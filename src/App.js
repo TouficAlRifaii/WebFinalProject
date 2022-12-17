@@ -1,10 +1,7 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import AuthForm from "./components/AuthForm";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import OverLayer from "./components/OverLayer";
 import Register from "./components/Register";
-import TextEditor from "./components/TextEditor";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
 import Users from "./components/Users";
