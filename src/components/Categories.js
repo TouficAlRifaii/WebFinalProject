@@ -7,7 +7,17 @@ const URL = "/getCategories";
 
 const Categories = () => {
   const [categories, setCategories] = useState();
+  const [deleting, setDeleting] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+
+  const handleDelete = async (categoryId) => {
+    const formData = new FormData();
+    formData.append("id", categoryId);
+    const response = await axiosPrivate.post("/deleteCategory", formData);
+    if (response.data["status"] === "success") {
+      setDeleting(!deleting);
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -31,7 +41,8 @@ const Categories = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [deleting]);
+
   return (
     <section className="users-flex">
       <h1>Categories List</h1>
@@ -57,7 +68,9 @@ const Categories = () => {
                       <Link to={`/updateCategory/${category.id}`}>
                         <button>Update</button>
                       </Link>
-                      <button>Delete</button>
+                      <button onClick={() => handleDelete(category.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
