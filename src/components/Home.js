@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Feed from "./Feed";
+import "../styles/home.css"
 
 const Home = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -18,13 +19,17 @@ const Home = () => {
     getArticles();
   }, []);
   return (
-    <main className="Home">
+    <div className="HomeContainer">
+        <main className="Home">
       {articles ? (
         <Feed articles={articles} />
       ) : (
         <p style={{ marginTop: "2rem" }}>No Articles to display.</p>
       )}
     </main>
+
+    </div>
+    
   );
 };
 

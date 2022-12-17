@@ -14,6 +14,7 @@ import CreateCategory from "./components/CreateCategory";
 import UpdateCategory from "./components/UpdateCategory";
 import Home from "./components/Home";
 import ArticlePage from "./components/ArticlePage";
+import NewArticle from "./components/NewArticle";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
               <Route exact path="/" element={<Home />}></Route>
               <Route path="/article/:id" element={<ArticlePage />} />
+              <Route exact path="/article" element={<NewArticle />} />
               <Route path="/users" element={<Users />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/createCategory" element={<CreateCategory />} />
