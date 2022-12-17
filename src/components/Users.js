@@ -66,53 +66,53 @@ const Users = () => {
   }, [blocking]);
 
   return (
-    <section className="users-flex">
-      <h1>Users List</h1>
+    <>
+      <section className="users-flex">
+        <h1>Users List</h1>
+      </section>
       {users?.length ? (
-        <div className="flexDiv">
-          <div className="table">
-            <table className="table__content">
-              <thead className="table__head">
-                <tr>
-                  <th className="table__heading-cell">Name</th>
-                  <th className="table__heading-cell">Email</th>
-                  <th className="table__heading-cell">Role</th>
-                  <th className="table__heading-cell">Permission</th>
-                  <th className="table__heading-cell">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="table__body">
-                {users.map((user) => (
-                  <tr key={user.id}>
-                    <td className="table__data-cell">{user?.name}</td>
-                    <td className="table__data-cell">{user.email}</td>
-                    <td className="table__data-cell">
-                      {user.isAdmin ? "Admin" : "Normal User"}
-                    </td>
-                    <td className="table__data-cell">
-                      {user.isBlocked ? "Blocked" : "Allowed"}
-                    </td>
-                    <td className="table__data-cell">
-                      {user.isBlocked ? (
-                        <button onClick={() => handleUnblock(user.id)}>
-                          <FontAwesomeIcon icon={faUnlock} />
-                        </button>
-                      ) : (
-                        <button onClick={() => handleBlock(user.id)}>
-                          <FontAwesomeIcon icon={faLock} />
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div class="table-container">
+          <ul class="responsive-table">
+            <li class="table-header">
+              <div class="col col-1">Name</div>
+              <div class="col col-2">Email</div>
+              <div class="col col-1">Type</div>
+              <div class="col col-1">Access</div>
+              <div class="col col-1">Actions</div>
+            </li>
+            {users?.map((user) => (
+              <li key={user.id} class="table-row">
+                <div class="col col-1" data-label="Name">
+                  {user.name}
+                </div>
+                <div class="col col-2" data-label="Email">
+                  {user.email}
+                </div>
+                <div class="col col-1" data-label="Type">
+                  {user.isAdmin ? "Admin" : "User"}
+                </div>
+                <div class="col col-1" data-label="Access">
+                  {user.isBlocked ? "Blocked" : "Allowed"}
+                </div>
+                <div class="col col-1" data-label="Actions">
+                  {user.isBlocked ? (
+                    <button onClick={() => handleUnblock(user.id)}>
+                      <FontAwesomeIcon icon={faUnlock} />
+                    </button>
+                  ) : (
+                    <button onClick={() => handleBlock(user.id)}>
+                      <FontAwesomeIcon icon={faLock} />
+                    </button>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
         <p>No users Registered</p>
       )}
-    </section>
+    </>
   );
 };
 
