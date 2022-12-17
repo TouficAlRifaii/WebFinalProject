@@ -16,7 +16,6 @@ const Users = () => {
   const authHeader = "Bearer " + token;
 
   //   getUsers();
-
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -72,6 +71,7 @@ const Users = () => {
       ) : (
         <p>No users Registered</p>
       )}
+      
     </section>
   );
 };

@@ -1,26 +1,40 @@
-import { Link, BrowserRouter as Router, useNavigate } from "react-router-dom";
+import {
+  Link,
+  BrowserRouter as Router,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import "../styles/navbar.css";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import useLogout from "../hooks/useLogout";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const logout = useLogout();
-  const navigate = useNavigate();
+  const location = useLocation().pathname;
+  // const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const boolean = token ? true : false;
+  const [loggedIn, setLoggedIn] = useState(boolean);
 
   const handleLogout = async (e) => {
     await logout();
+    setLoggedIn(false);
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLoggedIn(token ? true : false);
+  }, [location]);
   return (
     <nav className="navbar">
       <h3 className="logo">SSN</h3>
 
       <ul className={mobile ? "nav-links-mobile" : "nav-links"}>
-        {token ? (
+        {loggedIn ? (
           <>
             <Link to="/">
               <li>Home</li>
