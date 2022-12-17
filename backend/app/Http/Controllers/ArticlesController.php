@@ -91,8 +91,6 @@ class ArticlesController extends Controller
     public function getArticles($id = null)
     {
         if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->isAdmin) {
                 if ($id) {
                     $article = Article::find($id);
                     if(!$article){
@@ -118,11 +116,7 @@ class ArticlesController extends Controller
                     ]);
                 }
 
-            }
-            return response()->json([
-                "status" => "failed",
-                "message" => "You are not an admin",
-            ], 409);
+            
 
         }
         return response()->json([

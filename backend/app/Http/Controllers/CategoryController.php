@@ -16,7 +16,6 @@ class CategoryController extends Controller
         return response()->json([
             "status" => "success",
             "categories" => $categories,
-
         ]);
     }
     public function createCategory(Request $request)
