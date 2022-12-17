@@ -27,9 +27,11 @@ function App() {
           <Route path="/signup" element={<Register />} />
 
           <Route element={<PersistLogin />}>
-            <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+            <Route element={<RequireAuth allowedRoles={["Admin", "User"]} />}>
               <Route exact path="/" element={<Home />}></Route>
               <Route path="/article/:id" element={<ArticlePage />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
               <Route exact path="/article" element={<NewArticle />} />
               <Route path="/users" element={<Users />} />
               <Route path="/categories" element={<Categories />} />

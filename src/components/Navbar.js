@@ -18,6 +18,7 @@ const Navbar = () => {
   const location = useLocation().pathname;
   // const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const boolean = token ? true : false;
   const [loggedIn, setLoggedIn] = useState(boolean);
 
@@ -35,12 +36,16 @@ const Navbar = () => {
 
       <ul className={mobile ? "nav-links-mobile" : "nav-links"}>
         {loggedIn ? (
+          role === "Admin" ? ( 
           <>
             <Link to="/">
               <li>Home</li>
             </Link>
-            <Link to="/services">
-              <li>Services</li>
+            <Link to="/users">
+              <li>Users</li>
+            </Link>
+            <Link to="/article">
+              <li>Post</li>
             </Link>
             <Link to="/account">
               <li>Account</li>
@@ -49,7 +54,18 @@ const Navbar = () => {
               <li>Logout</li>
             </Link>
           </>
-        ) : (
+        ) : 
+        <>
+            <Link to="/">
+              <li>Home</li>
+            </Link>
+            <Link to="/account">
+              <li>Account</li>
+            </Link>
+            <Link onClick={handleLogout} to="/login">
+              <li>Logout</li>
+            </Link>
+          </> ): (
           <>
             <Link to="/login">
               <li>Login</li>
