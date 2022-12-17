@@ -19,6 +19,7 @@ import Users from "./components/Users";
 import PersistLogin from "./components/PersistLogin";
 import Categories from "./components/Categories";
 import CreateCategory from "./components/CreateCategory";
+import UpdateCategory from "./components/UpdateCategory";
 
 function App() {
   const refresh = useRefreshToken();
@@ -40,6 +41,7 @@ function App() {
               <Route path="/users" element={<Users />} />
               <Route path="/categories" element={<Categories />} />
               <Route path="/createCategory" element={<CreateCategory />} />
+              <Route path="/updateCategory/:id" element={<UpdateCategory />} />
             </Route>
           </Route>
 

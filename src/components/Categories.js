@@ -54,7 +54,9 @@ const Categories = () => {
                   <tr key={category.id}>
                     <td className="table__data-cell">{category?.name}</td>
                     <td className="table__data-cell">
-                      <button>Update</button>
+                      <Link to={`/updateCategory/${category.id}`}>
+                        <button>Update</button>
+                      </Link>
                       <button>Delete</button>
                     </td>
                   </tr>
