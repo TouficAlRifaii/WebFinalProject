@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/authForms.css";
 import axios from "../api/axios";
-import { wait } from "@testing-library/user-event/dist/utils";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -24,7 +24,7 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation;
   const from = location.state?.from?.pathname || "/";
-  const {auth} = useAuth();
+  const { auth } = useAuth();
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -48,8 +48,8 @@ const Register = () => {
   const token = auth?.token;
   useEffect(() => {
     userRef.current.focus();
-    if (token){
-      navigate(from, { replace: true })
+    if (token) {
+      navigate(from, { replace: true });
     }
   }, []);
 
@@ -302,7 +302,9 @@ const Register = () => {
           <div className="overlay">
             <div className="overlay-right">
               <h1>Already have an Account?</h1>
-              <button className="login-button overlayer-Login">Login</button>
+              <Link to="/login">
+                <button className="login-button overlayer-Login">Login</button>
+              </Link>
             </div>
           </div>
         </div>
