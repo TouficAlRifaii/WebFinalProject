@@ -29,5 +29,7 @@ Route::group([
     });
     Route::controller(ArticlesController::class)->group(function (){
         Route::post("createArticle" , "createArticle");
+        Route::post("updateArticle" , "updateArticle");
+        Route::get("getArticles/{id?}" , "getArticles");
     });
 });
