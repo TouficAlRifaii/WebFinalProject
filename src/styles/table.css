@@ -20,7 +20,7 @@
 
 .table__content {
   border-spacing: 0;
-  min-width: 33.75rem;
+  width: 100%;
 }
 
 .table__heading {
@@ -68,4 +68,19 @@
 .table__head .table__heading-cell:where(:last-child),
 .table__body .table__data-cell:where(:last-child) {
   border-right: none;
+}
+
+.icon{
+  font-size: 20px;
+}
+.icon.delete{
+  color: red;
+}
+.icon.edit{
+  color: green;
+}
+.createCat {
+  font-size: 20px;
+  color: blue;
+  margin-bottom: 10px;
 }

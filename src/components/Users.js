@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import "../styles/table.css";
+import {
+  faPenToSquare,
+  faTrash,
+  faLock,
+  faUnlock,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const USERS_URL = "/getUsers";
 
@@ -87,10 +94,12 @@ const Users = () => {
                     </td>
                     <td className="table__data-cell">
                       {user.isBlocked ? (
-                        <button onClick={() => handleUnblock(user.id)}>UnBlock</button>
+                        <button onClick={() => handleUnblock(user.id)}>
+                          <FontAwesomeIcon icon={faUnlock} />
+                        </button>
                       ) : (
                         <button onClick={() => handleBlock(user.id)}>
-                          Block
+                          <FontAwesomeIcon icon={faLock} />
                         </button>
                       )}
                     </td>

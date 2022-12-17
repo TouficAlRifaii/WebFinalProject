@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import "../styles/table.css";
+import { faPenToSquare, faTrash , faPlus} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const URL = "/getCategories";
 
@@ -47,7 +49,7 @@ const Categories = () => {
     <section className="users-flex">
       <h1>Categories List</h1>
       <Link to="/createCategory">
-        <button>New Category</button>
+        <button className="createCat">Create new Category <FontAwesomeIcon icon={faPlus} /></button>
       </Link>
 
       {categories?.length ? (
@@ -66,10 +68,10 @@ const Categories = () => {
                     <td className="table__data-cell">{category?.name}</td>
                     <td className="table__data-cell">
                       <Link to={`/updateCategory/${category.id}`}>
-                        <button>Update</button>
+                        <button><FontAwesomeIcon className="icon edit" icon={faPenToSquare} /></button>
                       </Link>
                       <button onClick={() => handleDelete(category.id)}>
-                        Delete
+                      <FontAwesomeIcon className="icon delete" icon={faTrash} />
                       </button>
                     </td>
                   </tr>
