@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -38,6 +38,7 @@ class CategoryController extends Controller
                 if ($category->save()) {
                     return response()->json([
                         "status" => "success",
+                        "message" => "Category Created Successfully",
                     ]);
                 }
 
