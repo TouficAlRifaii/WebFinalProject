@@ -17,6 +17,8 @@ import Unauthorized from "./components/Unauthorized";
 import useRefreshToken from "./hooks/useRefreshTokens";
 import Users from "./components/Users";
 import PersistLogin from "./components/PersistLogin";
+import Categories from "./components/Categories";
+import CreateCategory from "./components/CreateCategory";
 
 function App() {
   const refresh = useRefreshToken();
@@ -31,13 +33,13 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
-        </Routes>
 
-        <Routes>
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
               <Route exact path="/" element={<TextEditor />}></Route>
               <Route path="/users" element={<Users />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/createCategory" element={<CreateCategory />} />
             </Route>
           </Route>
 

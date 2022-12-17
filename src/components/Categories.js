@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import "../styles/table.css";
 
-const USERS_URL = "/getUsers";
+const URL = "/getCategories";
 
-const Users = () => {
-  const [users, setUsers] = useState();
+const Categories = () => {
+  const [categories, setCategories] = useState();
   const axiosPrivate = useAxiosPrivate();
 
-  //   getUsers();
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
 
-    const getUsers = async () => {
+    const getCategories = async () => {
       try {
-        const response = await axiosPrivate.get(USERS_URL);
+        const response = await axiosPrivate.get(URL);
         if (response.data["status"] === "success") {
-          isMounted && setUsers(response.data.users);
+          isMounted && setCategories(response.data.categories);
           console.log(response.data);
         }
       } catch (err) {
@@ -25,45 +25,37 @@ const Users = () => {
         //navigate("/login", { state: { from: location }, replace: true });
       }
     };
-
-    getUsers();
+    getCategories();
 
     return () => {
       isMounted = false;
       controller.abort();
     };
   }, []);
-
   return (
     <section className="users-flex">
-      <h1>Users List</h1>
-      {users?.length ? (
+      <h1>Categories List</h1>
+      <Link to="/createCategory">
+        <button>New Category</button>
+      </Link>
+
+      {categories?.length ? (
         <div className="flexDiv">
           <div className="table">
             <table className="table__content">
               <thead className="table__head">
                 <tr>
                   <th className="table__heading-cell">Name</th>
-                  <th className="table__heading-cell">Email</th>
-                  <th className="table__heading-cell">Role</th>
-                  <th className="table__heading-cell">Permission</th>
                   <th className="table__heading-cell">Actions</th>
                 </tr>
               </thead>
               <tbody className="table__body">
-                {users.map((user) => (
-                  <tr key={user.id}>
-                    <td className="table__data-cell">{user?.name}</td>
-                    <td className="table__data-cell">{user.email}</td>
+                {categories.map((category) => (
+                  <tr key={category.id}>
+                    <td className="table__data-cell">{category?.name}</td>
                     <td className="table__data-cell">
-                      {user.isAdmin ? "Admin" : "Normal User"}
-                    </td>
-                    <td className="table__data-cell">
-                      {user.isBlocked ? "Blocked" : "Allowed"}
-                    </td>
-                    <td className="table__data-cell">
-                      <button>{user.isBlocked ? "UnBlock" : "Block"}</button>
-                      {user.isAdmin ? <button>"Make Admin</button> : <></>}
+                      <button>Update</button>
+                      <button>Delete</button>
                     </td>
                   </tr>
                 ))}
@@ -72,10 +64,10 @@ const Users = () => {
           </div>
         </div>
       ) : (
-        <p>No users Registered</p>
+        <p>No categories Registered</p>
       )}
     </section>
   );
 };
 
-export default Users;
+export default Categories;
