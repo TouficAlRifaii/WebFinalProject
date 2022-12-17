@@ -1,0 +1,47 @@
+.homeContainer {
+    width: 100%;
+    max-width: 800px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #333;
+    box-shadow: 0px 0px 15px gray;
+  }
+  
+  .Home {
+    width: 100%;
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #fff;
+  }
+  .article {
+      margin-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid lightgray;
+    }
+    
+    .Home .article a {
+      text-decoration: none;
+    }
+    
+    .Home .article a, 
+    .Home .article a:visited {
+      color: #000;
+    }
+    
+    .article:first-child {
+      margin-top: 0;
+    }
+    
+    .article:last-child {
+      border-bottom: none;
+    }
+    
+    .articleDate {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+  
