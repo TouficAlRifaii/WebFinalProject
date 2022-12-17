@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import "../styles/table.css";
-import { faPenToSquare, faTrash , faPlus} from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenToSquare,
+  faTrash,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const URL = "/getCategories";
@@ -46,44 +50,52 @@ const Categories = () => {
   }, [deleting]);
 
   return (
-    <section className="users-flex">
-      <h1>Categories List</h1>
-      <Link to="/createCategory">
-        <button className="createCat">Create new Category <FontAwesomeIcon icon={faPlus} /></button>
-      </Link>
+    <>
+      <section className="users-flex">
+        <h1>Categories List</h1>
+        <Link to="/createCategory">
+          <button className="createCat">
+            Create new Category <FontAwesomeIcon icon={faPlus} />
+          </button>
+        </Link>
 
-      {categories?.length ? (
-        <div className="flexDiv">
-          <div className="table">
-            <table className="table__content">
-              <thead className="table__head">
-                <tr>
-                  <th className="table__heading-cell">Name</th>
-                  <th className="table__heading-cell">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="table__body">
-                {categories.map((category) => (
-                  <tr key={category.id}>
-                    <td className="table__data-cell">{category?.name}</td>
-                    <td className="table__data-cell">
-                      <Link to={`/updateCategory/${category.id}`}>
-                        <button><FontAwesomeIcon className="icon edit" icon={faPenToSquare} /></button>
-                      </Link>
-                      <button onClick={() => handleDelete(category.id)}>
-                      <FontAwesomeIcon className="icon delete" icon={faTrash} />
+        {categories?.length ? (
+          <div class="table-container">
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Name</div>
+                <div class="col col-1">Edit</div>
+                <div class="col col-1">Delete</div>
+              </li>
+              {categories?.map((category) => (
+                <li key={category.id} class="table-row">
+                  <div class="col col-1" data-label="Name">
+                    {category.name}
+                  </div>
+                  <div class="col col-1" data-label="Edit">
+                    <Link to={`/updateCategory/${category.id}`}>
+                      <button>
+                        <FontAwesomeIcon
+                          className="icon edit"
+                          icon={faPenToSquare}
+                        />
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </Link>
+                  </div>
+                  <div class="col col-1" data-label="Delete">
+                    <button onClick={() => handleDelete(category.id)}>
+                      <FontAwesomeIcon className="icon delete" icon={faTrash} />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      ) : (
-        <p>No categories Registered</p>
-      )}
-    </section>
+        ) : (
+          <p>No categories Registered</p>
+        )}
+      </section>
+    </>
   );
 };
 
