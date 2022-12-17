@@ -11,16 +11,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import useLogout from "../hooks/useLogout";
 import { useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
 
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const logout = useLogout();
   const location = useLocation().pathname;
-  // const navigate = useNavigate();
+
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   const boolean = token ? true : false;
   const [loggedIn, setLoggedIn] = useState(boolean);
+
+  const [isNavVisible, setNavVisibility] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 700px)");
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    handleMediaQueryChange(mediaQuery);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+  const handleMediaQueryChange = (mediaQuery) => {
+    if (mediaQuery.matches) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+
+  const toggleNav = () => {
+    setNavVisibility(!isNavVisible);
+  };
 
   const handleLogout = async (e) => {
     await logout();
@@ -31,59 +56,79 @@ const Navbar = () => {
     setLoggedIn(token ? true : false);
   }, [location]);
   return (
-    <nav className="navbar">
-      <h3 className="logo">SSN</h3>
+    <header className="Header">
+      <div className="LogoDiv">
+        <h3 className="Logo">SSN</h3>
+      </div>
 
-      <ul className={mobile ? "nav-links-mobile" : "nav-links"}>
-        {loggedIn ? (
-          role === "Admin" ? ( 
-          <>
-            <Link to="/">
-              <li>Home</li>
-            </Link>
-            <Link to="/users">
-              <li>Users</li>
-            </Link>
-            <Link to="/article">
-              <li>Post</li>
-            </Link>
-            <Link to="/account">
-              <li>Account</li>
-            </Link>
-            <Link onClick={handleLogout} to="/login">
-              <li>Logout</li>
-            </Link>
-          </>
-        ) : 
+      <CSSTransition
+        in={!isSmallScreen || isNavVisible}
+        timeout={350}
+        classNames="NavAnimation"
+        unmountOnExit
+      >
         <>
-            <Link to="/">
-              <li>Home</li>
-            </Link>
-            <Link to="/account">
-              <li>Account</li>
-            </Link>
-            <Link onClick={handleLogout} to="/login">
-              <li>Logout</li>
-            </Link>
-          </> ): (
-          <>
-            <Link to="/login">
-              <li>Login</li>
-            </Link>
-            <Link to="/signup">
-              <li>SignUp</li>
-            </Link>
-          </>
-        )}
-      </ul>
-      <button className="mobile-menu-icon" onClick={() => setMobile(!mobile)}>
+          {loggedIn ? (
+            role === "Admin" ? (
+              <nav className="Nav6">
+                <Link className="a" to="/">
+                  Home
+                </Link>
+                <Link className="a" to="/users">
+                  Users
+                </Link>
+                <Link className="a" to="/article">
+                  Post
+                </Link>
+                <Link className="a" to="/categories">
+                  Categories
+                </Link>
+                <Link className="a" to="/account">
+                  Account
+                </Link>
+                <Link className="a" onClick={handleLogout} to="/login">
+                  Logout
+                </Link>
+              </nav>
+            ) : (
+              <nav className="Nav3">
+                <Link className="a" to="/">
+                  Home
+                </Link>
+                <Link className="a" to="/account">
+                  Account
+                </Link>
+                <Link className="a" onClick={handleLogout} to="/login">
+                  Logout
+                </Link>
+              </nav>
+            )
+          ) : (
+            <nav className="Nav2">
+              <Link className="a" to="/login">
+                Login
+              </Link>
+              <Link className="a" to="/signup">
+                SignUp
+              </Link>
+            </nav>
+          )}
+        </>
+      </CSSTransition>
+      <button
+        onClick={() => {
+          toggleNav();
+          setMobile(!mobile);
+        }}
+        className="Burger"
+      >
         {mobile ? (
           <FontAwesomeIcon className="menu" icon={faXmark} />
         ) : (
           <FontAwesomeIcon className="menu" icon={faBars} />
         )}
       </button>
-    </nav>
+    </header>
   );
 };
 
