@@ -19,10 +19,8 @@ const Users = () => {
     const data = new FormData();
     data.append("id", user_id);
     try {
-      console.log(user_id);
       const response = await axiosPrivate.post("/blockUser", data);
       setBlocking(!blocking);
-      console.log(response);
     } catch (error) {
       console.log(error.response);
     }
@@ -31,10 +29,8 @@ const Users = () => {
     const data = new FormData();
     data.append("id", user_id);
     try {
-      console.log(user_id);
       const response = await axiosPrivate.post("/unblockUser", data);
       setBlocking(!blocking);
-      console.log(response);
     } catch (error) {
       console.log(error.response);
     }
@@ -49,7 +45,6 @@ const Users = () => {
         const response = await axiosPrivate.get(USERS_URL);
         if (response.data["status"] === "success") {
           isMounted && setUsers(response.data.users);
-          console.log(response.data);
         }
       } catch (err) {
         console.error(err);

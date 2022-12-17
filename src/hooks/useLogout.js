@@ -9,7 +9,6 @@ const useLogout = () => {
     setAuth({});
     try {
       const response = await axios.post("/logout");
-      console.log(response.data);
       if (response.data["status"] === "success") {
         localStorage.removeItem("token");
         localStorage.removeItem("role");

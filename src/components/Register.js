@@ -73,11 +73,6 @@ const Register = () => {
   useEffect(() => {
     setErrMsg("");
   }, [user, password, matchPassword]);
-  // useEffect(()=> {
-  //   setTimeout(() => {
-  //     navigate("/login")
-  //   }, 2000);
-  // }, [success]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -289,13 +284,6 @@ const Register = () => {
             >
               Sign Up
             </button>
-            {/* <p>
-                Already registered? <br />
-                <span className="line">
-                  
-                  <a href="#">Log In</a>
-                </span>
-              </p> */}
           </form>
         </div>
         <div className="overlayContainer">

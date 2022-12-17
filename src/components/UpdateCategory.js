@@ -24,7 +24,6 @@ const UpdateCategory = () => {
     formData.append("name", name);
     formData.append("id", id);
     const response = await axios.post(URL, formData);
-    console.log(response);
     if (response.data["status"] === "success") {
       setSuccess(true);
       setErrMsg(response.data["message"]);

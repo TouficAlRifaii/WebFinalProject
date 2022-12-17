@@ -34,7 +34,7 @@ const Categories = () => {
         const response = await axiosPrivate.get(URL);
         if (response.data["status"] === "success") {
           isMounted && setCategories(response.data.categories);
-          console.log(response.data);
+          
         }
       } catch (err) {
         console.error(err);

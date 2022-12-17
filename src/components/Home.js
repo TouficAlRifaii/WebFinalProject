@@ -11,7 +11,6 @@ const Home = () => {
   useEffect(() => {
     const getArticles = async () => {
       const response = await axiosPrivate.get("/getArticles");
-      console.log(response);
       if (response.data["status"] === "success") {
         setArticles(response.data["articles"]);
       }

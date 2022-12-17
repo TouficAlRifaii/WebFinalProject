@@ -27,11 +27,6 @@ const NewArticle = () => {
       } catch (error) {
         console.log("error: " + error);
       }
-
-      //   if (response.data["status"] === "success") {
-      //     setCategories(response.data["categories"]);
-      //     console.log(categories);
-      //   }
     };
     getCategories();
   }, []);
@@ -44,7 +39,6 @@ const NewArticle = () => {
       formData.append("content", content);
       formData.append("category_id", categoryId);
       const response = await axiosPrivate.post("/createArticle", formData);
-      console.log(response.data);
       if (response.data["status"] === "success") {
         setSuccess(true);
         setErrMsg(response.data["message"]);
