@@ -27,12 +27,12 @@ function App() {
 
       <Router>
         <Navbar />
-        <div className="body">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-          </Routes>
-        </div>
+
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+        </Routes>
+
         <Routes>
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth allowedRoles={["Admin"]} />}>

@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth";
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { auth , setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -25,8 +25,8 @@ const Login = () => {
 
   useEffect(() => {
     emailRef.current.focus();
-    if (token){
-      navigate(from, { replace: true })
+    if (token) {
+      navigate(from, { replace: true });
     }
   }, []);
 
@@ -44,10 +44,10 @@ const Login = () => {
       if (response.data["status"] === "success") {
         const token = response.data.authorisation["token"];
         const role = response.data.authorisation["role"];
-        setAuth({ email,token, role });
-        localStorage.setItem("token" , token);
-        localStorage.setItem("role" , role);
-        localStorage.setItem("email" , email);
+        setAuth({ email, token, role });
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+        localStorage.setItem("email", email);
         // setEmail("");
         // setPassword("");
         navigate(from, { replace: true });
@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="body">
       <section className="container">
         <div className="Login">
           <p
@@ -104,7 +104,7 @@ const Login = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
