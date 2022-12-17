@@ -13,7 +13,7 @@ class ArticlesController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user . isAdmin) {
+            if ($user->isAdmin) {
                 $validate = Validator::make($request->all(), [
                     "title" => "required|string|max:30",
                     "content" => "required|string",
