@@ -7,7 +7,31 @@ const USERS_URL = "/getUsers";
 const Users = () => {
   const [users, setUsers] = useState();
   const axiosPrivate = useAxiosPrivate();
-
+  const [blocking, setBlocking] = useState(false);
+  const handleBlock = async (user_id) => {
+    const data = new FormData();
+    data.append("id", user_id);
+    try {
+      console.log(user_id);
+      const response = await axiosPrivate.post("/blockUser", data);
+      setBlocking(!blocking);
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const handleUnblock = async (user_id) => {
+    const data = new FormData();
+    data.append("id", user_id);
+    try {
+      console.log(user_id);
+      const response = await axiosPrivate.post("/unblockUser", data);
+      setBlocking(!blocking);
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   //   getUsers();
   useEffect(() => {
     let isMounted = true;
@@ -32,7 +56,7 @@ const Users = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [blocking]);
 
   return (
     <section className="users-flex">
@@ -62,8 +86,13 @@ const Users = () => {
                       {user.isBlocked ? "Blocked" : "Allowed"}
                     </td>
                     <td className="table__data-cell">
-                      <button>{user.isBlocked ? "UnBlock" : "Block"}</button>
-                      {user.isAdmin ? <button>"Make Admin</button> : <></>}
+                      {user.isBlocked ? (
+                        <button onClick={() => handleUnblock(user.id)}>UnBlock</button>
+                      ) : (
+                        <button onClick={() => handleBlock(user.id)}>
+                          Block
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
