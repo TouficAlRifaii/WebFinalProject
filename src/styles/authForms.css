@@ -15,10 +15,11 @@
     min-height: 480px;
     background: #fff;
     border: 10px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 14px 28px rgba(0, 0, 0, 25), 0 10px 10px rgba(0, 0, 0, 25);
   }
   .Login {
+    display: flex;
     position: absolute;
     text-align: center;
     top: 0;
