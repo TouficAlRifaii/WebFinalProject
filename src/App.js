@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import ArticlePage from "./components/ArticlePage";
 import NewArticle from "./components/NewArticle";
 import Account from "./components/Account";
+import AuthVerify from "./components/AuthVerify";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
 
             <Route path="/unauthorized" element={<Unauthorized />}></Route>
           </Routes>
+          <AuthVerify />
         </Router>
       </div>
     </div>

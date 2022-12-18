@@ -60,19 +60,19 @@ const Categories = () => {
         </Link>
 
         {categories?.length ? (
-          <div class="table-container">
-            <ul class="responsive-table">
-              <li class="table-header">
-                <div class="col col-1">Name</div>
-                <div class="col col-1">Edit</div>
-                <div class="col col-1">Delete</div>
+          <div className="table-container">
+            <ul className="responsive-table">
+              <li className="table-header">
+                <div className="col col-1">Name</div>
+                <div className="col col-1">Edit</div>
+                <div className="col col-1">Delete</div>
               </li>
               {categories?.map((category) => (
-                <li key={category.id} class="table-row">
-                  <div class="col col-1" data-label="Name">
+                <li key={category.id} className="table-row">
+                  <div className="col col-1" data-label="Name">
                     {category.name}
                   </div>
-                  <div class="col col-1" data-label="Edit">
+                  <div className="col col-1" data-label="Edit">
                     <Link to={`/updateCategory/${category.id}`}>
                       <button>
                         <FontAwesomeIcon
@@ -82,7 +82,7 @@ const Categories = () => {
                       </button>
                     </Link>
                   </div>
-                  <div class="col col-1" data-label="Delete">
+                  <div className="col col-1" data-label="Delete">
                     <button onClick={() => handleDelete(category.id)}>
                       <FontAwesomeIcon className="icon delete" icon={faTrash} />
                     </button>

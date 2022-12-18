@@ -66,30 +66,30 @@ const Users = () => {
         <h1>Users List</h1>
       </section>
       {users?.length ? (
-        <div class="table-container">
-          <ul class="responsive-table">
-            <li class="table-header">
-              <div class="col col-1">Name</div>
-              <div class="col col-2">Email</div>
-              <div class="col col-1">Type</div>
-              <div class="col col-1">Access</div>
-              <div class="col col-1">Actions</div>
+        <div className="table-container">
+          <ul className="responsive-table">
+            <li className="table-header">
+              <div className="col col-1">Name</div>
+              <div className="col col-2">Email</div>
+              <div className="col col-1">Type</div>
+              <div className="col col-1">Access</div>
+              <div className="col col-1">Actions</div>
             </li>
             {users?.map((user) => (
-              <li key={user.id} class="table-row">
-                <div class="col col-1" data-label="Name">
+              <li key={user.id} className="table-row">
+                <div className="col col-1" data-label="Name">
                   {user.name}
                 </div>
-                <div class="col col-2" data-label="Email">
+                <div className="col col-2" data-label="Email">
                   {user.email}
                 </div>
-                <div class="col col-1" data-label="Type">
+                <div className="col col-1" data-label="Type">
                   {user.isAdmin ? "Admin" : "User"}
                 </div>
-                <div class="col col-1" data-label="Access">
+                <div className="col col-1" data-label="Access">
                   {user.isBlocked ? "Blocked" : "Allowed"}
                 </div>
-                <div class="col col-1" data-label="Actions">
+                <div className="col col-1" data-label="Actions">
                   {user.isBlocked ? (
                     <button onClick={() => handleUnblock(user.id)}>
                       <FontAwesomeIcon icon={faUnlock} />

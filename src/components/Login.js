@@ -6,6 +6,13 @@ import "../styles/authForms.css";
 import useAuth from "../hooks/useAuth";
 
 const LOGIN_URL = "/login";
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch (e) {
+    return null;
+  }
+};
 
 const Login = () => {
   const { auth, setAuth } = useAuth();
@@ -44,10 +51,13 @@ const Login = () => {
       if (response.data["status"] === "success") {
         const token = response.data.authorisation["token"];
         const role = response.data.authorisation["role"];
+        const splittedToken = parseJwt(token);
+
         setAuth({ email, token, role });
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
         localStorage.setItem("email", email);
+        localStorage.setItem("expiryDate", splittedToken.exp * 1000);
         // setEmail("");
         // setPassword("");
         navigate(from, { replace: true });
