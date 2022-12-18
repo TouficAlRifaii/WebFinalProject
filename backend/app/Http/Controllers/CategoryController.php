@@ -10,14 +10,41 @@ use Validator;
 
 class CategoryController extends Controller
 {
-    public function getCategories()
+    public function getCategories($id = null)
     {
-        $categories = Category::where("deleted_at", null)->get();
+        if (Auth::check()) {
+            if ($id) {
+                $category = Category::find($id);
+                if (!$category) {
+                    return response()->json([
+                        "status" => "failed",
+                        "message" => "category not found",
+                    ], 404);
+
+                }
+                $categories = [];
+                $categories[] = $category;
+                if ($category) {
+                    return response()->json([
+                        "status" => "success",
+                        "categories" => $categories,
+                    ]);
+                }
+            } else {
+                $categories = category::all();
+                return response()->json([
+                    "status" => "success",
+                    "categorys" => $categories,
+                ]);
+            }
+
+        }
         return response()->json([
-            "status" => "success",
-            "categories" => $categories,
-        ]);
+            "status" => "failed",
+            "message" => "You are not Logged in",
+        ], 409);
     }
+
     public function createCategory(Request $request)
     {
         if (Auth::check()) {

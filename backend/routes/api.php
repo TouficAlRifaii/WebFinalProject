@@ -22,7 +22,7 @@ Route::group([
         Route::post('editProfile', 'editProfile');
     });
     Route::controller(CategoryController::class)->group(function () {
-        Route::get("getCategories" , "getCategories");
+        Route::get("getCategories/{id?}" , "getCategories");
         Route::post("createCategory" , "createCategory");
         Route::post("updateCategory" , "updateCategory");
         Route::post("deleteCategory", "deleteCategory");
