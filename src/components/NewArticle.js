@@ -110,7 +110,13 @@ const NewArticle = () => {
               )}
             </select>
 
-            <button type="submit">Submit</button>
+            <button
+              className="login-button"
+              type="submit"
+              disabled={!title || !content || !categoryId ? true : false}
+            >
+              Post
+            </button>
           </form>
         </section>
       </div>

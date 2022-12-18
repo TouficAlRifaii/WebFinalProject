@@ -33,48 +33,45 @@ const CreateCategory = () => {
 
   return (
     <div className="body">
-      <section className="container">
-        <div className="Login">
-          {success ? (
-            <p
-              ref={errRef}
-              className={errMsg ? "successmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
-          ) : (
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {errMsg}
-            </p>
-          )}
-          <form onSubmit={handleSubmit}>
-            <h1>New Category</h1>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              ref={nameRef}
-              autoComplete="off"
-              onChange={(e) => setName(e.target.value)}
-              required
-              aria-describedby="uidnote"
-              
-            />
+      <section className="container newCat">
+        {success ? (
+          <p
+            ref={errRef}
+            className={errMsg ? "successmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+        ) : (
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
+        )}
+        <form onSubmit={handleSubmit}>
+          <h1>New Category</h1>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            ref={nameRef}
+            autoComplete="off"
+            onChange={(e) => setName(e.target.value)}
+            required
+            aria-describedby="uidnote"
+          />
 
-            <button
-              className="login-button"
-              type="submit"
-              disabled={!name ? true : false}
-            >
-              Create Category
-            </button>
-          </form>
-        </div>
+          <button
+            className="login-button"
+            type="submit"
+            disabled={!name ? true : false}
+          >
+            Create Category
+          </button>
+        </form>
       </section>
     </div>
   );

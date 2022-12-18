@@ -15,7 +15,7 @@
     min-height: 480px;
     background: #fff;
     border: 10px;
-    /* overflow: hidden; */
+    overflow: hidden;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 25), 0 10px 10px rgba(0, 0, 0, 25);
   }
   .Login {
@@ -156,4 +156,11 @@
     font-weight: bold;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
+  }
+
+  .newCat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
