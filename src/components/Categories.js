@@ -8,6 +8,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../styles/buttons.css";
 
 const URL = "/getCategories";
 
@@ -57,7 +58,7 @@ const Categories = () => {
       <section className="users-flex">
         <h1>Categories List</h1>
         <Link to="/createCategory">
-          <button className="createCat">
+          <button className="fancy-button fancy-button-blue">
             Create new Category <FontAwesomeIcon icon={faPlus} />
           </button>
         </Link>
@@ -66,18 +67,18 @@ const Categories = () => {
           <div className="table-container">
             <ul className="responsive-table">
               <li className="table-header">
-                <div className="col col-1">Name</div>
-                <div className="col col-1">Edit</div>
-                <div className="col col-1">Delete</div>
+                <div className="col col-2">Name</div>
+                <div className="col col-2">Edit</div>
+                <div className="col col-2">Delete</div>
               </li>
               {categories?.map((category) => (
                 <li key={category.id} className="table-row">
-                  <div className="col col-1" data-label="Name">
+                  <div className="col col-2" data-label="Name">
                     {category.name}
                   </div>
-                  <div className="col col-1" data-label="Edit">
+                  <div className="col col-2" data-label="Edit">
                     <Link to={`/updateCategory/${category.id}`}>
-                      <button>
+                      <button className="fancy-button fancy-button-green">
                         <FontAwesomeIcon
                           className="icon edit"
                           icon={faPenToSquare}
@@ -85,8 +86,11 @@ const Categories = () => {
                       </button>
                     </Link>
                   </div>
-                  <div className="col col-1" data-label="Delete">
-                    <button onClick={() => handleDelete(category.id)}>
+                  <div className="col col-2" data-label="Delete">
+                    <button
+                      className="fancy-button fancy-button-red"
+                      onClick={() => handleDelete(category.id)}
+                    >
                       <FontAwesomeIcon className="icon delete" icon={faTrash} />
                     </button>
                   </div>

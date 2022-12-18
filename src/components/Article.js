@@ -8,6 +8,7 @@ const Article = ({ article }) => {
         <p className="articleDate">{article.updated_at}</p>
       </Link>
     </article>
+    
   );
 };
 

@@ -1,0 +1,47 @@
+.fancy-button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  /* height: 10%; */
+}
+.fancy-button:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+.fancy-button-green {
+  /* Add a green gradient background to the button */
+  width: 40%;
+  height: 70%;
+  padding: 16;
+  background: linear-gradient(to right, #2ecc71, #27ae60);
+}
+
+.fancy-button-green:hover {
+  /* Add a hover effect to the button */
+  background: linear-gradient(to right, #27ae60, #2ecc71);
+}
+.fancy-button-red {
+  width: 40%;
+  height: 70%;
+  padding: 16;
+  background: linear-gradient(to right, #e74c3c, #c0392b);
+}
+
+.fancy-button-red:hover {
+  background: linear-gradient(to right, #c0392b, #e74c3c);
+}
+.fancy-button-blue {
+  background: linear-gradient(to right, #3498db, #2980b9);
+}
+
+.fancy-button-blue:hover {
+  background: linear-gradient(to right, #2980b9, #3cb0fd);
+}
