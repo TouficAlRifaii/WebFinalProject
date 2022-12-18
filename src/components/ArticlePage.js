@@ -19,7 +19,6 @@ const ArticlePage = () => {
     const response = await axiosPrivate.get(`/getArticles/${id}`);
     if (response.data["status"] === "success") {
       const article = response.data["articles"][0];
-      // console.log(article.category_id);
       setTitle(article.title);
       setContent(article.content);
       setCategoryId(article.category_id);
