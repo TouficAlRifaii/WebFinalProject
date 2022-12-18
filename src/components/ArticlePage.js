@@ -6,43 +6,55 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const ArticlePage = () => {
   const { id } = useParams();
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  const [categoryId, setCategoryId] = useState("0");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [categoryId, setCategoryId] = useState();
   const axiosPrivate = useAxiosPrivate();
   const categories = [];
   const role = localStorage.getItem("role");
   const [editing, setEditing] = useState(false);
   const [categoryName, setCategoryName] = useState();
 
+  const getArticle = async () => {
+    const response = await axiosPrivate.get(`/getArticles/${id}`);
+    if (response.data["status"] === "success") {
+      const article = response.data["articles"][0];
+      // console.log(article.category_id);
+      setTitle(article.title);
+      setContent(article.content);
+      setCategoryId(article.category_id);
+      setCategoryName(response.data["CategoryName"]);
+    }
+  };
   useEffect(() => {
-    const getArticle = async () => {
-      const response = await axiosPrivate.get(`/getArticles/${id}`);
-      if (response.data["status"] === "success") {
-        const article = response.data["articles"][0];
-        setTitle(article.title);
-        setContent(article.content);
-        setCategoryId(article["category_id"]);
-        const categoryResponse = await axiosPrivate.get(
-          "/getCategories/" + categoryId
-        );
-        if (categoryResponse.data["status"] === "success") {
-          console.log(categoryResponse);
-          setCategoryName(categoryResponse.data["categories"][0]["name"]);
-        }
-      }
-    };
     getArticle();
   }, []);
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("category_id", categoryId);
+      const response = await axiosPrivate.post("/updateArticle", formData);
+      if (response.data["status"] === "success") {
+        setEditing(false);
+      }
+    } catch (error) {
+      // setErrMsg(error.response.data["message"]);
+    }
+  };
+
   return (
     <div className="body">
       <div className="newArticlecontainer">
         <section className="NewArticle">
-          <form className="newArticleForm">
+          <form className="newArticleForm" onSubmit={(e) => e.preventDefault()}>
             <h1>New Article</h1>
             <label htmlFor="ArticleTitle">Title:</label>
             <input
-              disabled
+              disabled={editing ? false : true}
               id="ArticleTitle"
               type="text"
               required
@@ -51,7 +63,7 @@ const ArticlePage = () => {
             />
             <label htmlFor="ArticleBody">Article:</label>
             <textarea
-              disabled
+              disabled={editing ? false : true}
               id="ArticleBody"
               required
               value={content}
@@ -59,28 +71,41 @@ const ArticlePage = () => {
             />
 
             <select
-              disabled
+              disabled={editing ? false : true}
               onChange={(e) => setCategoryId(e.target.value)}
               className="classic"
             >
               <option value={categoryId}>{categoryName}</option>
-              {/* {categories ? (
-                categories.map((category) => (
-                  <option
-                    key={category.id}
-                    value={category.id}
-                    className="option"
-                  >
-                    {category.name}
-                  </option>
-                ))
+              {editing ? (
+                categories ? (
+                  categories.map((category) => (
+                    <option
+                      key={category.id}
+                      value={category.id}
+                      className="option"
+                    >
+                      {category.name}
+                    </option>
+                  ))
+                ) : (
+                  <option label="Empty" value="" className="option"></option>
+                )
               ) : (
-                <option label="Empty" value="" className="option"></option>
-              )} */}
+                <></>
+              )}
             </select>
             {role === "Admin" ? (
-              <button className="fancy-button fancy-button-green" type="submit">
-                Edit
+              <button
+                onClick={
+                  editing ? () => handleSubmit() : () => setEditing(true)
+                }
+                className={
+                  editing
+                    ? "fancy-button fancy-button-blue"
+                    : "fancy-button fancy-button-green"
+                }
+              >
+                {editing ? "Save" : "Edit"}
               </button>
             ) : (
               <></>
