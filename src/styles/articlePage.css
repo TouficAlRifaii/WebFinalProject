@@ -1,0 +1,30 @@
+.article {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .article-title {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+  
+  .article-content {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 1em;
+  }
+  
+  .edit-button {
+    border: none;
+    background-color: #333;
+    color: #fff;
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+  
+  .edit-button:hover {
+    background-color: #444;
+  }
+  
