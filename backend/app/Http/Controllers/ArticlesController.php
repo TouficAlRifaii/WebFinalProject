@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -93,6 +94,7 @@ class ArticlesController extends Controller
         if (Auth::check()) {
                 if ($id) {
                     $article = Article::find($id);
+                    
                     if(!$article){
                         return response()->json([
                             "status" => "failed",
@@ -102,10 +104,13 @@ class ArticlesController extends Controller
                     }
                     $articles = [];
                     $articles[] = $article;
+                    $category_id = $article->category_id;
+                    $category = Category::find($category_id);
                     if ($article) {
                         return response()->json([
                             "status" => "success",
                             "articles" => $articles,
+                            "CategoryName" => $category->name
                         ]);
                     }
                 } else {
