@@ -13,6 +13,7 @@ const useLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         localStorage.removeItem("email");
+        localStorage.removeItem("expiryDate");
       }
     } catch (err) {
       console.error(err);
