@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function getCategories()
     {
-        $categories = Category::all();
+        $categories = Category::where("deleted_at", null)->get();
         return response()->json([
             "status" => "success",
             "categories" => $categories,
@@ -76,13 +76,15 @@ class CategoryController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isAdmin) {
+                $category = Category::find($request->id);
+                $category->deleted_at = Carbon::now();
+                if ($category->save()) {
+                    return response()->json([
+                        "status" => "success",
+                        "message" => "Category Deleted Successfully",
+                    ], 200);
 
-                DB::delete('delete from categories where id = ?', [$request->id]);
-
-                return response()->json([
-                    "status" => "success",
-                    "message" => "Category Updated Successfully",
-                ], 200);
+                }
 
             }
         }

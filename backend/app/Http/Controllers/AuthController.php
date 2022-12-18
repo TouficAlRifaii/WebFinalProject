@@ -262,11 +262,29 @@ class AuthController extends Controller
         }
 
     }
-    public function testGet()
+    public function forgotPassword(Request $request)
     {
-        return response()->json([
-            "status" => "success",
-        ], 200);
+        $validate = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+        ]);
+        if ($validate->fails()) {
+            return response()->json([
+                "status" => "failed",
+                "message" => "Bad Input",
+            ], 400);
+        }
+        $checkUser = User::where("email", $request->email)->get();
+        if (isset($checkIfexist[0]['email'])) {
+            $subject = "Reset Password Link";
+            
+
+        } else {
+            return response()->json([
+                "status" => "failed",
+                "message" => "User Does not exist",
+            ], 404);
+        }
+
     }
 
 }
