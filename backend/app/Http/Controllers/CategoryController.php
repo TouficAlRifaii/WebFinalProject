@@ -34,7 +34,7 @@ class CategoryController extends Controller
                 $categories = category::all();
                 return response()->json([
                     "status" => "success",
-                    "categorys" => $categories,
+                    "categories" => $categories,
                 ]);
             }
 
