@@ -12,6 +12,7 @@ import UpdateCategory from "./components/UpdateCategory";
 import Home from "./components/Home";
 import ArticlePage from "./components/ArticlePage";
 import NewArticle from "./components/NewArticle";
+import Account from "./components/Account";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth allowedRoles={["Admin", "User"]} />}>
                 <Route exact path="/" element={<Home />}></Route>
+                <Route exact path="/account" element={<Account />}></Route>
                 <Route path="/article/:id" element={<ArticlePage />} />
               </Route>
               <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
