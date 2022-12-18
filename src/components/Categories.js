@@ -19,9 +19,13 @@ const Categories = () => {
   const handleDelete = async (categoryId) => {
     const formData = new FormData();
     formData.append("id", categoryId);
-    const response = await axiosPrivate.post("/deleteCategory", formData);
-    if (response.data["status"] === "success") {
-      setDeleting(!deleting);
+    try {
+      const response = await axiosPrivate.post("/deleteCategory", formData);
+      if (response.data["status"] === "success") {
+        setDeleting(!deleting);
+      }
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -34,7 +38,6 @@ const Categories = () => {
         const response = await axiosPrivate.get(URL);
         if (response.data["status"] === "success") {
           isMounted && setCategories(response.data.categories);
-          
         }
       } catch (err) {
         console.error(err);
