@@ -1,19 +1,23 @@
 import useAuth from "./useAuth";
-import useAxiosPrivate from "./useAxiosPrivate";
+// import useAxiosPrivate from "./useAxiosPrivate";
+import axios from "../api/axios";
 
 const useLogout = () => {
   const { setAuth } = useAuth();
-  const axios = useAxiosPrivate();
+  // const axios = useAxiosPrivate();
 
   const logout = async () => {
     setAuth({});
     try {
-      const response = await axios.post("/logout");
+      const token = localStorage.getItem("token");
+      localStorage.clear();
+      const response = await axios.post("/logout", {
+        headers: {
+          Authentication: `Bearer ${token}`
+        }
+      });
       if (response.data["status"] === "success") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("email");
-        localStorage.removeItem("expiryDate");
+        
       }
     } catch (err) {
       console.error(err);
